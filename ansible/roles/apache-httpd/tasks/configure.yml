@@ -1,0 +1,30 @@
+---
+
+- name: Modify apache listening port
+  replace: 
+    path: /etc/apache2/ports.conf
+    regexp: '^(Listen)\s+.*'
+    replace: '\g<1> {{ apache_local_port }}'
+  notify: restart apache
+
+- name: Modify default site-enabled config
+  replace:
+    path: /etc/apache2/sites-enabled/000-default.conf
+    regexp: '(<VirtualHost.*:).*>'
+    replace: '\g<1>{{ apache_local_port }}>'
+  notify: restart apache
+
+- name: Check apache config
+  command: apachectl configtest
+  changed_when: false
+
+- name: Generate custom webpage
+  template:
+    src: index-test.html.j2
+    dest: "{{ apache_website_dir }}/index.html"
+    owner: "{{ apache_user }}"
+    group: "{{ apache_group}}"
+    mode: '0640'
+  notify: restart apache
+
+...

@@ -1,0 +1,9 @@
+ <!DOCTYPE html>
+<html>
+<body>
+
+<h1>Welcome to this webserver provisioned with Terraform and Ansible, hosted on AWS.</h1>
+<h2>The webservers Host name is: {{ ansible_facts.nodename }}</h2>
+<h2>The webservers IP address is: {{ ansible_facts.default_ipv4.address }}</h2>
+</body>
+</html> 

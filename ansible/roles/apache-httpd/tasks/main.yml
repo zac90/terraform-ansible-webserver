@@ -1,0 +1,11 @@
+---
+
+- name: Install apache httpd
+  import_tasks: install.yml
+  tags: install_apache_httpd
+
+- name: Configure apache httpd
+  import_tasks: configure.yml
+  tags: install_apache_httpd  
+
+...

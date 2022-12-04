@@ -1,0 +1,10 @@
+---
+
+- name: Start apache httpd
+  systemd:
+    name: apache2
+    enabled: true
+    state: restarted
+  listen: restart apache
+
+...
