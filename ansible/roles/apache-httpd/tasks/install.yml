@@ -17,4 +17,13 @@
     state: present
   notify: restart apache
 
+- name: Set permissions on apache dir
+  file:
+    path: "{{ apache_website_dir }}"
+    owner: "{{ apache_user }}"
+    group: "{{ apache_group }}"
+    mode: u=rwX,g=rX,o=rX
+    recurse: true
+    state: directory
+
 ...
