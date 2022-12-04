@@ -34,4 +34,10 @@
   loop_control:
     label: "{{ item.file_path }}"
 
+- name: Remove default nginx config
+  file:
+    path: "{{ nginx_site_enabled_dir }}/default"
+    state: absent
+  notify: reload nginx
+
 ...
