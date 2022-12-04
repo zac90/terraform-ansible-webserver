@@ -1,5 +1,7 @@
 # Overview
-This repo quickly provisions a basic web server in AWS with Terraform and configures the server with Ansible
+This repo quickly provisions a basic web server in AWS with Terraform and configures the server with Ansible  
+The webserver uses nginx as the reverse proxy and will generate self signed certs and ensure all  
+connections are via HTTPS. The nginx instance manages the SSL termination and then forwards on to Apache2 HTTP.
 
 ## Setup
 1. Configure your AWS Access keys
