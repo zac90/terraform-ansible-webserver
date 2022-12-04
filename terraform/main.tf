@@ -88,10 +88,11 @@ resource "null_resource" "ansible" {
   # Ensure this runs after generated IP
   triggers = {
     order = local_file.ansible_inventory.id
+    always_run = "${timestamp()}"
   }
 # Execute Ansible
   provisioner "local-exec" { 
-    command = "ansible-playbook -i inventories/dev/hosts site.yml --private-key ${var.local_pk_dir}/${var.webserver_pk_name}"
+    command = "sleep 10 && ansible-playbook -i inventories/dev/hosts site.yml --private-key ${var.local_pk_dir}/${var.webserver_pk_name}"
     working_dir = "${path.root}/../ansible"
     environment =  {
       ANSIBLE_HOST_KEY_CHECKING = "False"
