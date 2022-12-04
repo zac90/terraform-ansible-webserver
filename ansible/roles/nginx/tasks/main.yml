@@ -12,10 +12,4 @@
   import_tasks: configure.yml
   tags: install_nginx  
 
-
-
-
-
-
-
 ...

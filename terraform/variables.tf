@@ -5,6 +5,7 @@ variable "local_pk_dir" {
   type = string
 }
 
+# Private key name
 variable "webserver_pk_name" {
   type = string
 }

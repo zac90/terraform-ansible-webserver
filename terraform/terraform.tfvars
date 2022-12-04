@@ -9,6 +9,7 @@ webserver_params = {
 local_pk_dir = "~/.ssh"
 webserver_pk_name = "aws_webserver"
 
+# Recommend locking down cidr block to a range
 sg_ssh_ingress = [
   {
     cidr_block  = ["0.0.0.0/0"],

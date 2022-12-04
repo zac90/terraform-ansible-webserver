@@ -1,15 +1,5 @@
 ---
 
-# - name: Create apache groups
-#   group:
-#     name: "{{ apache_group }}"
-#     state: present
-
-# - name: Create apache default user
-#   user:
-#     name: "{{ apache_user }}"
-#     group: "{{ apache_group }}"
-
 - name: Install apache httpd
   apt:
     name: apache2
@@ -22,7 +12,7 @@
     path: "{{ apache_website_dir }}"
     owner: "{{ apache_user }}"
     group: "{{ apache_group }}"
-    mode: u=rwX,g=rX,o=rX
+    mode: u=rwX,g=rX,o=
     recurse: true
     state: directory
 

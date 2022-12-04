@@ -19,7 +19,7 @@ nginx_tls_dirs:
   
   - dir_path: "{{ nginx_key_dir }}"
     file_path: "{{ nginx_key_dir }}/{{ nginx_key_name }}"
-    permissions: u+rwX,g-rwx,o-rwx
+    permissions: u=rwX,g=,o=
 
 # TLS cert vars
 nginx_cert_name: nginx-default.crt
@@ -27,6 +27,5 @@ nginx_key_name: nginx-default.key
 nginx_cert_dir: /etc/ssl/nginx/certs
 nginx_key_dir: /etc/ssl/nginx/private
 nginx_cert_subj: '/C=AU/ST=QLD/L=Brisbane/O=examplecompany/OU=Org/CN=somelongawsdnsurl.com.au'
-
 
 ...

@@ -35,11 +35,6 @@ resource "aws_security_group" "webserver" {
   } 
 }
 
-# locals {
-#   # Collate list of security group ids made
-#   webserver_sg_ids = [aws_security_group.webserver.id]#, aws_security_group.webserver_ssh.id]
-# }
-
 # Create private key for instance connection
 # Not the most secure way due to it storing key in terraform state
 # But for this purpose it is okay.
@@ -100,9 +95,3 @@ resource "null_resource" "ansible" {
     }
   }
 }
-
-# output "webserver" {
-#   value = "${path.root}/../"
-#   #value = aws_instance.webserver[*].public_ip
-# }
-
