@@ -1,0 +1,37 @@
+---
+
+- name: Install nginx
+  apt:
+    name: nginx
+    update_cache: true
+    state: present
+
+- name: Create TLS cert dirs
+  file:
+    path: "{{ item.dir_path }}" 
+    state: directory
+    owner: root
+    group: root
+    mode: "{{ item.permissions }}" 
+  loop: "{{ nginx_tls_dirs }}"
+  loop_control:
+    label: "{{ item.dir_path }}"
+
+- name: Generate self signed SSL/TLS certs
+  command: "openssl req -x509 -newkey rsa:3072 -nodes -keyout {{ nginx_key_dir }}/{{ nginx_key_name }} \
+            -out {{ nginx_cert_dir }}/{{ nginx_cert_name }} -sha256 -days 365 -subj '{{ nginx_cert_subj }}'"
+  args:
+    creates: "{{ nginx_cert_dir }}/{{ nginx_cert_name }}"
+
+- name: Ensure correct permissions on certs
+  file:
+    path: "{{ item.file_path }}"
+    owner: root
+    group: root
+    mode: "{{ item.permissions }}" 
+    state: file
+  loop: "{{ nginx_tls_dirs }}"
+  loop_control:
+    label: "{{ item.file_path }}"
+
+...

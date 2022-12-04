@@ -1,0 +1,32 @@
+---
+
+nginx_app_port: 8080
+nginx_cname: nginx-cname
+
+nginx_site_config_dir: /etc/nginx/sites-available
+nginx_site_enabled_dir: /etc/nginx/sites-enabled/
+
+nginx_firewall_ports:
+  - port: '80'
+    proto: tcp
+  - port: '443'
+    proto: tcp   
+
+nginx_tls_dirs:
+  - dir_path: "{{ nginx_cert_dir }}"
+    file_path: "{{ nginx_cert_dir }}/{{ nginx_cert_name }}"
+    permissions: u=rwX,g=rX,o=rX
+  
+  - dir_path: "{{ nginx_key_dir }}"
+    file_path: "{{ nginx_key_dir }}/{{ nginx_key_name }}"
+    permissions: u+rwX,g-rwx,o-rwx
+
+# TLS cert vars
+nginx_cert_name: nginx-default.crt
+nginx_key_name: nginx-default.key
+nginx_cert_dir: /etc/ssl/nginx/certs
+nginx_key_dir: /etc/ssl/nginx/private
+nginx_cert_subj: '/C=AU/ST=QLD/L=Brisbane/O=examplecompany/OU=Org/CN=somelongawsdnsurl.com.au'
+
+
+...

@@ -1,0 +1,20 @@
+---
+
+# state enabled does both
+- name: Enable and reload firewall
+  ufw:
+    state: enabled
+  listen: reload firewall
+
+- name: Start nginx service
+  systemd:
+    name: nginx
+    enabled: true
+    state: started
+  listen: start nginx
+
+- name: Reload nginx service
+  command: nginx -s reload
+  listen: reload nginx
+
+...

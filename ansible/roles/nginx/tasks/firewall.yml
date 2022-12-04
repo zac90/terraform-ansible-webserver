@@ -1,0 +1,21 @@
+---
+
+- name: Allow SSH connections
+  community.general.ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
+  notify: reload firewall
+
+- name: Allow additonal ports
+  community.general.ufw:
+    rule: allow
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  loop: "{{ nginx_firewall_ports }}"
+  notify: reload firewall
+
+- name: FLush handlers so firewall is enabled
+  meta: flush_handlers
+
+...

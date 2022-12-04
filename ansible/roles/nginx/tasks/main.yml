@@ -1,0 +1,21 @@
+---
+
+- name: Install nginx
+  import_tasks: install.yml
+  tags: install_nginx  
+
+- name: Configure firewall
+  import_tasks: firewall.yml
+  tags: install_nginx  
+
+- name: Configure nginx
+  import_tasks: configure.yml
+  tags: install_nginx  
+
+
+
+
+
+
+
+...
