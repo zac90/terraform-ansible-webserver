@@ -1,6 +1,7 @@
 # Assign values to variables declared in variables.tf here
 webserver_params = {
   ami           = "ami-0df609f69029c9bdb",
+  ami_ssh_user  = "ubuntu"
   count         = 1,
   instance_type = "t2.micro"
 }

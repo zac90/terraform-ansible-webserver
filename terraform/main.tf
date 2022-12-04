@@ -27,6 +27,12 @@ resource "aws_security_group" "webserver" {
       cidr_blocks = ingress.value.cidr_block
     }
   }
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  } 
 }
 
 # locals {
@@ -79,13 +85,18 @@ resource "local_file" "ansible_inventory" {
 
 # Created to ensure it always runs the latest Ansible
 resource "null_resource" "ansible" {
+  # Ensure this runs after generated IP
+  triggers = {
+    order = local_file.ansible_inventory.id
+  }
 # Execute Ansible
   provisioner "local-exec" { 
     command = "ansible-playbook -i inventories/dev/hosts site.yml --private-key ${var.local_pk_dir}/${var.webserver_pk_name}"
     working_dir = "${path.root}/../ansible"
     environment =  {
       ANSIBLE_HOST_KEY_CHECKING = "False"
-    }    
+      ANSIBLE_REMOTE_USER = var.webserver_params.ami_ssh_user
+    }
   }
 }
 

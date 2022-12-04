@@ -14,6 +14,7 @@ variable "webserver_params" {
   type = object({
     count         = number
     ami           = string
+    ami_ssh_user  = string    
     instance_type = string
   })
 }
